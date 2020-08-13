@@ -481,7 +481,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 6000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -775,14 +775,14 @@ MonoBehaviour:
   mouseDeadZone: 0.1
   thrust: {x: 0, y: 0, z: 10}
   throttle: 100
-  throttleAmount: 0.25
+  throttleAmount: 1
   maxThrottle: 50
-  minThrottle: -2
-  pitchStrength: 40
-  yawStrength: 1.5
-  rollStrength: 1.5
+  minThrottle: -5
+  pitchStrength: 80
+  yawStrength: 5
+  rollStrength: 5
   flightAssist: 0
-  impulseMode: 1
+  impulseMode: 0
   impulseCoolDown: 3
 --- !u!54 &1671476614
 Rigidbody:
