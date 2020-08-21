@@ -1,0 +1,25 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using Business_simulation.Entity;
+using UnityEngine;
+
+namespace Business_simulation.Collection
+{
+    [System.Serializable]
+    public class ProductionGoodCollection : List<ProductionGood>
+    {
+        public ProductionGoodCollection(List<ProductionGood> availableGoods) :base(availableGoods)
+        {
+        }
+
+        public ProductionGood FindByGood(GameObject Good)
+        {
+            return Find(availableGood => availableGood.Good == Good);
+        }
+
+        public float PermittedVolume()
+        {
+            return this.Select(availableGood => availableGood.Count).Sum();
+        }
+    }
+}
