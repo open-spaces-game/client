@@ -41,4 +41,9 @@ public class PersonalCharacteristic : MonoBehaviour
     /// </summary>
     [SerializeField]
     public Characteristic Efficiency;
+
+    public bool CanWorkProcess()
+    {
+        return true;
+    }
 }
