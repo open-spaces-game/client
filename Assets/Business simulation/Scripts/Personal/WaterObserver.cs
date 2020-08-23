@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BusinessSimulation.Scripts.Personal
 {
@@ -23,7 +21,7 @@ namespace BusinessSimulation.Scripts.Personal
             
             if (PersonalCharacteristic.Water.GetPct() < MinWaterPct)
             {
-                PersonalCharacteristic.Water.Damage(MinWaterDamageHealth * Time.deltaTime);
+                PersonalCharacteristic.Health.Damage(MinWaterDamageHealth * Time.deltaTime);
             }
         }
     }
