@@ -391,6 +391,36 @@ MonoBehaviour:
   MinFoodPct: 0.2
   MinFoodDamageHealth: 0.3
   DamageFood: 0.01
+--- !u!114 &3610758878919540624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3610758878919540622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf816635067248d6b07b53365437c53a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinSleepPct: 0.2
+  MinSleepDamageHealth: 0.3
+  DamageSleep: 0.01
+--- !u!114 &3610758878919540625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3610758878919540622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77e9ff3b7a2540bd9cffc3123a201647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinWaterPct: 0.2
+  MinWaterDamageHealth: 0.3
+  DamageWater: 0.01
 --- !u!1001 &8072247527473647517
 PrefabInstance:
   m_ObjectHideFlags: 0
