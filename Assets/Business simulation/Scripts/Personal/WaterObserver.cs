@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace BusinessSimulation.Scripts.Personal
 {
-    public class FoodObserver : MonoBehaviour
+    public class WaterObserver : MonoBehaviour
     {
-        public float MinFoodPct = 0.2f;
-        public float MinFoodDamageHealth = 0.3f;
-        public float DamageFood = 0.01f;
+        public float MinWaterPct = 0.2f;
+        public float MinWaterDamageHealth = 0.3f;
+        public float DamageWater = 0.01f;
         
         private PersonalCharacteristic PersonalCharacteristic;
         
@@ -19,11 +19,11 @@ namespace BusinessSimulation.Scripts.Personal
 
         void Update()
         {
-            PersonalCharacteristic.Food.Damage(DamageFood * Time.deltaTime);
+            PersonalCharacteristic.Water.Damage(DamageWater * Time.deltaTime);
             
-            if (PersonalCharacteristic.Food.GetPct() < MinFoodPct)
+            if (PersonalCharacteristic.Water.GetPct() < MinWaterPct)
             {
-                PersonalCharacteristic.Health.Damage(MinFoodDamageHealth * Time.deltaTime);
+                PersonalCharacteristic.Water.Damage(MinWaterDamageHealth * Time.deltaTime);
             }
         }
     }
