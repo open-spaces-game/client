@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Business_simulation.Collection;
 using Business_simulation.Entity;
 using UnityEngine;
 using Debug = System.Diagnostics.Debug;
@@ -16,17 +17,25 @@ public class ProductionOfGoods : MonoBehaviour
     public ProductionGood OutgoingGood;
     public float GoodProductionTime;
     public GameObject Citizen;
+    private ProductionGoodCollection IncomingProductionGoods
+    {
+        get { return (ProductionGoodCollection)(IncomingGoods is ProductionGoodCollection 
+            ? IncomingGoods
+            : IncomingGoods = new ProductionGoodCollection(IncomingGoods)); }
+    }
     
-    private PersonalCharacteristic CitizenCharacteristic;
+    
+    private PersonalCharacteristic CitizenCharacteristic { get; set; } 
+    private GoodStorage Storage { get; set; }
 
     private float TimeOut = 0;
-    private bool _isCitizenCharacteristicNotNull;
     /// <summary>
     /// 
     /// </summary>
     private void Start()
     {
         TimeOut = GoodProductionTime;
+        Storage = GetComponent<GoodStorage>();
         //Set storage
     }
 
@@ -40,7 +49,7 @@ public class ProductionOfGoods : MonoBehaviour
             TimeOut -= Time.deltaTime * CitizenCharacteristic.Efficiency.GetPct();
             if (TimeOut <= 0)
             {
-                //Set storage OutgoingGood
+                Storage.PutGood(OutgoingGood);
                 Status = ProductionStatus.WaitingStart;
                 RunProcess();
             }
@@ -71,8 +80,9 @@ public class ProductionOfGoods : MonoBehaviour
     private void RunProcess()
     {
         TimeOut = Status == ProductionStatus.Pause ? TimeOut : GoodProductionTime;
-        if (true)
+        if (Storage.CheckExistsGoods(IncomingProductionGoods) && Storage.GetFreePlace() > OutgoingGood.Count)
         {
+            Storage.TakeGoods(IncomingProductionGoods);
             Status = ProductionStatus.Run;
         }
         else
