@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Business_simulation.Entity
+namespace BusinessSimulation.Entity
 {
     [System.Serializable]
     public class Characteristic
@@ -10,12 +10,17 @@ namespace Business_simulation.Entity
 
         public float GetPct()
         {
-            return Max == 0 ? Real / Max : 0;
+            return Max == 0 ? 0 : Real / Max ;
         }
 
         public void SetValue(float value)
         {
             Real = value > Max ? Max : value;
+        }
+
+        public void Damage(float value)
+        {
+            Real = Mathf.Max(Real - value, 0);
         }
     }
 }

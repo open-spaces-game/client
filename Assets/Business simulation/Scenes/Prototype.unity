@@ -358,6 +358,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3610758877650903466, guid: 9de3dafc7eecb224dac6e25c2a964ba3,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3610758877650903469, guid: 9de3dafc7eecb224dac6e25c2a964ba3,
         type: 3}
       propertyPath: m_Name
@@ -365,6 +370,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9de3dafc7eecb224dac6e25c2a964ba3, type: 3}
+--- !u!1 &3610758878919540622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3610758877650903469, guid: 9de3dafc7eecb224dac6e25c2a964ba3,
+    type: 3}
+  m_PrefabInstance: {fileID: 3610758878919540621}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3610758878919540623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3610758878919540622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a157e318ef89b949a25a3ed65b96008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinFoodPct: 0.2
+  MinFoodDamageHealth: 0.3
+  DamageFood: 0.01
 --- !u!1001 &8072247527473647517
 PrefabInstance:
   m_ObjectHideFlags: 0
