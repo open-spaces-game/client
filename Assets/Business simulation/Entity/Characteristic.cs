@@ -10,7 +10,7 @@ namespace BusinessSimulation.Entity
 
         public float GetPct()
         {
-            return Max == 0 ? Real / Max : 0;
+            return Max == 0 ? 0 : Real / Max ;
         }
 
         public void SetValue(float value)

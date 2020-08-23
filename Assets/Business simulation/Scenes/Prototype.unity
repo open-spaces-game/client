@@ -358,6 +358,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3610758877650903466, guid: 9de3dafc7eecb224dac6e25c2a964ba3,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3610758877650903469, guid: 9de3dafc7eecb224dac6e25c2a964ba3,
         type: 3}
       propertyPath: m_Name
@@ -384,8 +389,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinFoodPct: 0.2
-  MinFoodDamageHealth: 0.001
-  DamageFood: 0.001
+  MinFoodDamageHealth: 0.3
+  DamageFood: 0.01
 --- !u!1001 &8072247527473647517
 PrefabInstance:
   m_ObjectHideFlags: 0

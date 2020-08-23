@@ -19,12 +19,11 @@ namespace BusinessSimulation.Scripts.Personal
 
         void Update()
         {
-            PersonalCharacteristic.Food.Damage(DamageFood);
+            PersonalCharacteristic.Food.Damage(DamageFood * Time.deltaTime);
             
-            Debug.Log(PersonalCharacteristic.Food.GetPct());
             if (PersonalCharacteristic.Food.GetPct() < MinFoodPct)
             {
-                PersonalCharacteristic.Health.Damage(MinFoodDamageHealth);
+                PersonalCharacteristic.Health.Damage(MinFoodDamageHealth * Time.deltaTime);
             }
         }
     }
