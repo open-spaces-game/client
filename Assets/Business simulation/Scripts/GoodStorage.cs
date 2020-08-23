@@ -1,73 +1,75 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using Business_simulation.Collection;
-using Business_simulation.Entity;
+using BusinessSimulation.Collection;
+using BusinessSimulation.Entity;
 using UnityEngine;
 
-public class GoodStorage : MonoBehaviour
+namespace BusinessSimulation.Scripts
 {
-    public float PermittedVolume;
-    [SerializeField]
-    public List<ProductionGood> AvailableGoods;
-
-    private ProductionGoodCollection AvailableProductionGoods
+    public class GoodStorage : MonoBehaviour
     {
-        get { return (ProductionGoodCollection)(AvailableGoods is ProductionGoodCollection 
-            ? AvailableGoods
-            : AvailableGoods = new ProductionGoodCollection(AvailableGoods)); }
-    }
+        public float PermittedVolume;
+        [SerializeField]
+        public List<ProductionGood> AvailableGoods;
 
-
-
-    public void PutGood(ProductionGood productionGood)
-    {
-        var availableGood = AvailableProductionGoods.FindByGood(productionGood.Good);
-
-        if (availableGood != null)
+        private ProductionGoodCollection AvailableProductionGoods
         {
-            availableGood.Count += productionGood.Count;
+            get { return (ProductionGoodCollection)(AvailableGoods is ProductionGoodCollection 
+                ? AvailableGoods
+                : AvailableGoods = new ProductionGoodCollection(AvailableGoods)); }
         }
-        else
-        {
-            AvailableGoods.Add(productionGood);
-        }
-    }
-    
-    public bool CheckExistsGoods(ProductionGoodCollection incomingGoods)
-    {
-        foreach (var productionGood in incomingGoods)
+
+
+
+        public void PutGood(ProductionGood productionGood)
         {
             var availableGood = AvailableProductionGoods.FindByGood(productionGood.Good);
-            if (availableGood == null || productionGood.Count > availableGood.Count)
+
+            if (availableGood != null)
             {
-                return false;
+                availableGood.Count += productionGood.Count;
+            }
+            else
+            {
+                AvailableGoods.Add(productionGood);
             }
         }
         
-        return true;
-    }
-
-    public void TakeGoods(ProductionGoodCollection incomingGoods)
-    {
-        foreach (var productionGood in incomingGoods)
+        public bool CheckExistsGoods(ProductionGoodCollection incomingGoods)
         {
-            var availableGood = AvailableProductionGoods.FindByGood(productionGood.Good);
-            if (availableGood != null)
+            foreach (var productionGood in incomingGoods)
             {
-                if (productionGood.Count > availableGood.Count)
+                var availableGood = AvailableProductionGoods.FindByGood(productionGood.Good);
+                if (availableGood == null || productionGood.Count > availableGood.Count)
                 {
-                    throw new Exception("Количество больше чем есть в хранилище");
+                    return false;
                 }
+            }
+            
+            return true;
+        }
 
-                availableGood.Count -= productionGood.Count;
+        public void TakeGoods(ProductionGoodCollection incomingGoods)
+        {
+            foreach (var productionGood in incomingGoods)
+            {
+                var availableGood = AvailableProductionGoods.FindByGood(productionGood.Good);
+                if (availableGood != null)
+                {
+                    if (productionGood.Count > availableGood.Count)
+                    {
+                        throw new Exception("Количество больше чем есть в хранилище");
+                    }
+
+                    availableGood.Count -= productionGood.Count;
+                }
             }
         }
-    }
 
-    public float GetFreePlace()
-    {
-        var availableVolume = AvailableProductionGoods.PermittedVolume();
-        return Math.Max(PermittedVolume - availableVolume, 0);
+        public float GetFreePlace()
+        {
+            var availableVolume = AvailableProductionGoods.PermittedVolume();
+            return Math.Max(PermittedVolume - availableVolume, 0);
+        }
     }
 }

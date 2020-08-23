@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Business_simulation.Entity;
+using BusinessSimulation.Entity;
 using UnityEngine;
 
-namespace Business_simulation.Collection
+namespace BusinessSimulation.Collection
 {
     [System.Serializable]
     public class ProductionGoodCollection : List<ProductionGood>
