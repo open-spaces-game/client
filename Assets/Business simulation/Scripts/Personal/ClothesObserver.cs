@@ -7,7 +7,7 @@ namespace BusinessSimulation.Scripts.Personal
     public class ClothesObserver : MonoBehaviour
     {
         public float MinClothesPct = 0.2f;
-        public float MinClothesDamageEntertainment = 0.3f;
+        public float MinClothesDamageEfficiency = 0.3f;
         public float DamageClothes = 0.01f;
         
         private PersonalCharacteristic PersonalCharacteristic;
@@ -23,7 +23,7 @@ namespace BusinessSimulation.Scripts.Personal
             
             if (PersonalCharacteristic.Clothes.GetPct() < MinClothesPct)
             {
-                PersonalCharacteristic.Efficiency.Damage(MinClothesDamageEntertainment * Time.deltaTime);
+                PersonalCharacteristic.Efficiency.Damage(MinClothesDamageEfficiency * Time.deltaTime);
             }
         }
     }

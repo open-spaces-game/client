@@ -7,7 +7,7 @@ namespace BusinessSimulation.Scripts.Personal
     public class SleepObserver : MonoBehaviour
     {
         public float MinSleepPct = 0.2f;
-        public float MinSleepDamageHealth = 0.3f;
+        public float MinSleepDamageEfficiency = 0.3f;
         public float DamageSleep = 0.01f;
         
         private PersonalCharacteristic PersonalCharacteristic;
@@ -23,7 +23,7 @@ namespace BusinessSimulation.Scripts.Personal
             
             if (PersonalCharacteristic.Sleep.GetPct() < MinSleepPct)
             {
-                PersonalCharacteristic.Efficiency.Damage(MinSleepDamageHealth * Time.deltaTime);
+                PersonalCharacteristic.Efficiency.Damage(MinSleepDamageEfficiency * Time.deltaTime);
             }
         }
     }
