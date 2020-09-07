@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BusinessSimulation.Enum;
 using UnityEngine;
 
 namespace BusinessSimulation.Scripts.Build
@@ -13,12 +14,16 @@ namespace BusinessSimulation.Scripts.Build
 
         private TerrainTargetPosition TerrainTargetPosition;
         private List<GameObject> buildings;
+        private MarkerStructureValidator markerStructureValidator;
+        private MarkerStructureColor markerStructureColor;
 
         // Start is called before the first frame update
         void Start()
         {
             TerrainTargetPosition = GetComponent<TerrainTargetPosition>();
             MarkerStructure = Instantiate<GameObject>(TargetStructure);
+            markerStructureValidator = MarkerStructure.AddComponent<MarkerStructureValidator>();
+            markerStructureColor = MarkerStructure.AddComponent<MarkerStructureColor>();
             buildings = FindBuildings(); 
         }
 
@@ -29,7 +34,13 @@ namespace BusinessSimulation.Scripts.Build
             {
                 MarkerStructure.SetActive(true);
                 MarkerStructure.transform.position = GetMarkerPosition();
-                if (Input.GetMouseButtonDown(0))
+                
+                var isValidPlace = markerStructureValidator.IsValid(buildings, MarkerStructure);
+                
+                var validColor = isValidPlace ? Color.white : Color.red;
+                markerStructureColor.ChangeColor(validColor);
+                
+                if (isValidPlace && Input.GetMouseButtonDown(0))
                 {
                     GameObject Structure = Instantiate<GameObject>(TargetStructure);
                     Structure.transform.position = MarkerStructure.transform.position;
@@ -56,7 +67,7 @@ namespace BusinessSimulation.Scripts.Build
         {
             try
             {
-                return  GameObject.FindGameObjectsWithTag("building").ToList();
+                return  GameObject.FindGameObjectsWithTag(GameTag.building.ToString()).ToList();
             }
             catch (Exception e)
             {
