@@ -330,7 +330,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &348007349
 Transform:
   m_ObjectHideFlags: 0
@@ -456,7 +456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &598432142
 Transform:
   m_ObjectHideFlags: 0
@@ -828,7 +828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1171336933
 Transform:
   m_ObjectHideFlags: 0
@@ -1080,7 +1080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1438701637
 Transform:
   m_ObjectHideFlags: 0
@@ -1638,7 +1638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1891013885
 Transform:
   m_ObjectHideFlags: 0
@@ -1867,3 +1867,5 @@ MonoBehaviour:
   doorRight: {fileID: 1191977865}
   doorForward: {fileID: 1244243134}
   doorBack: {fileID: 201553778}
+  roof: {fileID: 598432141}
+  floor: {fileID: 973485902}

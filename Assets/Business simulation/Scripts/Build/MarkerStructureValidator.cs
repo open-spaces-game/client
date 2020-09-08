@@ -20,14 +20,13 @@ namespace BusinessSimulation.Scripts.Build
                 colliderChild.isTrigger = true;
             }
             
-            
             gameObject.AddComponent<Rigidbody>();
 
         }
 
         public bool IsValid(List<GameObject> buildings, GameObject markerStructure)
         {
-            return isValid;
+            return true || isValid;
         }
 
 

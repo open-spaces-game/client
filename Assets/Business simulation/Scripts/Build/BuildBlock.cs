@@ -15,5 +15,8 @@ namespace BusinessSimulation.Scripts.Build
         public GameObject doorRight;
         public GameObject doorForward;
         public GameObject doorBack;
+
+        public GameObject roof;
+        public GameObject floor;
     }
 }
