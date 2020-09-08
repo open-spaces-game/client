@@ -6,11 +6,16 @@ using UnityEngine;
 
 namespace BusinessSimulation.Scripts.Build
 {
-    public class BuildTargetPosition : MonoBehaviour
+    public class BuildTargetPosition : MonoBehaviour, TargetPositionInterface
     {
         public float Distance = 1000;
-        public RaycastHit TargetPosition;
-        public bool IsPosition;
+
+        public RaycastHit TargetPosition
+        {
+            get { return _targetPosition; }
+        }
+        public RaycastHit _targetPosition;
+        public bool IsPosition { get; private set; }
         
         
         private List<Collider> _buildObjectColliders;
@@ -31,7 +36,7 @@ namespace BusinessSimulation.Scripts.Build
         void Update()
         {
             _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            IsPosition = _buildObjectColliders.Any(collider => collider.Raycast(_ray, out TargetPosition, Distance));
+            IsPosition = _buildObjectColliders.Any(collider => collider.Raycast(_ray, out _targetPosition, Distance));
         }
 
         private List<Collider> FindBuilderColliders()
