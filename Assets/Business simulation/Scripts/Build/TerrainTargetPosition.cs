@@ -5,12 +5,16 @@ using UnityEngine;
 
 namespace BusinessSimulation.Scripts.Build
 {
-    public class TerrainTargetPosition : MonoBehaviour
+    public class TerrainTargetPosition : MonoBehaviour, TargetPositionInterface
     {
         public GameObject Terrain;
         public float Distance = 1000;
-        public RaycastHit TargetPosition;
-        public bool IsPosition;
+        public RaycastHit TargetPosition
+        {
+            get { return _targetPosition; }
+        }
+        public RaycastHit _targetPosition;
+        public bool IsPosition { get; private set; }
 
         private TerrainCollider TerrainCollider;
         private RaycastHit Hit;
@@ -25,7 +29,7 @@ namespace BusinessSimulation.Scripts.Build
         void Update()
         {
             Ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            IsPosition = TerrainCollider.Raycast(Ray, out TargetPosition, Distance);
+            IsPosition = TerrainCollider.Raycast(Ray, out _targetPosition, Distance);
         }
     }
 }
