@@ -21281,6 +21281,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PanelBottomMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 2987444483869726958, guid: 47312b57b86316b4ba33d46d4411add2,
+        type: 3}
+      propertyPath: m_MovementType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2987444483933103106, guid: 47312b57b86316b4ba33d46d4411add2,
         type: 3}
       propertyPath: m_AnchorMax.x
