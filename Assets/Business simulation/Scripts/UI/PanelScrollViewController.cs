@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BusinessSimulation.Scripts.UI
 {
@@ -10,10 +11,12 @@ namespace BusinessSimulation.Scripts.UI
         public GameObject ContentContainer;
 
         private Dictionary<string, GameObject> tabs;
+        private ScrollRect scrollRect; 
 
         private void Start()
         {
             tabs = new Dictionary<string, GameObject>();
+            scrollRect = GetComponent<ScrollRect>();
         }
 
         public void Clear()
@@ -33,9 +36,11 @@ namespace BusinessSimulation.Scripts.UI
             }
             else
             {
-                tabContent = Instantiate(tabContent, ContentContainer.transform, true);
+                tabContent = Instantiate(tabContent, ContentContainer.transform, false);
                 tabs.Add(name, tabContent);
             }
+
+            scrollRect.content = tabs[name].GetComponent<RectTransform>();
         }
     }
 }
