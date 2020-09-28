@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BusinessSimulation.Scripts.Build;
 using UnityEngine;
 
@@ -11,12 +12,11 @@ namespace BusinessSimulation.Scripts.ProductionMachine
         
         private TerrainTargetPosition _terrainTargetPosition;
         private BuildTargetPosition _buildTargetPosition;
-        
+
         void Start()
         {
             _terrainTargetPosition = GetComponent<TerrainTargetPosition>();
             _buildTargetPosition = GetComponent<BuildTargetPosition>();
-            MarkerProductionMachine = Instantiate<GameObject>(TargetProductionMachine);
         }
         
         void Update()
@@ -71,6 +71,32 @@ namespace BusinessSimulation.Scripts.ProductionMachine
                  point.z - scale.z);
              return new Vector3((int)position.x, position.y, (int)position.z);
         }
+
+        private void OnEnable()
+        {
+            Clear();
+        }
         
+        private void OnDisable()
+        {
+            Clear();
+        }
+        
+        public void SetTarget(GameObject targetPrefab, GameObject markerPrefab = null)
+        {
+            Clear();
+            TargetProductionMachine = targetPrefab;
+            MarkerProductionMachine = Instantiate(markerPrefab ? markerPrefab : targetPrefab);
+        }
+
+        public void Clear()
+        {
+            TargetProductionMachine = null;
+            if (!(MarkerProductionMachine is null))
+            {
+                Destroy(MarkerProductionMachine);
+                MarkerProductionMachine = null;
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BusinessSimulation.Scripts.UI
+namespace BusinessSimulation.Scripts.UI.Button
 {
     public class TabButton : MonoBehaviour
     {

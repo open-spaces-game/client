@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BusinessSimulation.Scripts.UI.Button;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,7 @@ namespace BusinessSimulation.Scripts.UI
 
         public void Clear()
         {
+            transform.parent.GetComponentInChildren<CancelButton>()?.Clear();
             foreach (var tabContent in tabs.Select(tab => tab.Value))
             {
                 tabContent.SetActive(false);

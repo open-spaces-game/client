@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BusinessSimulation.Scripts.UI.Button;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,15 +20,15 @@ namespace BusinessSimulation.Scripts.UI
             
             foreach (var item in query)
             {
-                var batton = Instantiate(ButtonPrifab, transform, false);
+                var button = Instantiate(ButtonPrifab, transform, false);
 
-                batton.GetComponentInChildren<Text>().text = item.Name;
+                button.GetComponentInChildren<Text>().text = item.Name;
                 if (item.Image)
                 {
-                    batton.GetComponent<Image>().sprite = item.Image;
+                    button.GetComponent<Image>().sprite = item.Image;
                 }
 
-                batton.GetComponent<InstallationProductionMachineButton>().ProductionMachine = item.gameObject;
+                button.GetComponent<InstallationButtonInterface>().TargetPrefab = item.gameObject;
             }
         }
     }

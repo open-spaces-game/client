@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace BusinessSimulation.Scripts.Build
 {
@@ -19,7 +20,15 @@ namespace BusinessSimulation.Scripts.Build
         private TerrainCollider TerrainCollider;
         private RaycastHit Hit;
         private Ray Ray;
+        private int fingerID = -1;
 
+        private void Awake()
+        {
+        #if !UNITY_EDITOR
+        fingerID = 0; 
+        #endif
+        }
+        
         private void Start()
         {
             TerrainCollider = Terrain.GetComponent<TerrainCollider>();
@@ -28,8 +37,26 @@ namespace BusinessSimulation.Scripts.Build
         // Update is called once per frame
         void Update()
         {
+            
+            if (EventSystem.current.IsPointerOverGameObject(fingerID))    // is the touch on the GUI
+            {
+                IsPosition = false;
+                // GUI Action
+                return;
+            }
+            
             Ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             IsPosition = TerrainCollider.Raycast(Ray, out _targetPosition, Distance);
+        }
+
+        private void OnDisable()
+        {
+            IsPosition = false;
+        }
+        
+        private void OnEnable()
+        {
+            IsPosition = false;
         }
     }
 }
