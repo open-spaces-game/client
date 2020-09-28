@@ -74,5 +74,37 @@ namespace BusinessSimulation.Scripts.Build
                 return new List<GameObject>();
             }
         }
+        
+        private void OnEnable()
+        {
+            Clear();
+        }
+        
+        private void OnDisable()
+        {
+            Clear();
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="targetPrefab"></param>
+        /// <param name="markerPrefab"></param>
+        public void SetTarget(GameObject targetPrefab, GameObject markerPrefab)
+        {
+            Clear();
+            TargetStructure = targetPrefab;
+            MarkerStructure = Instantiate(markerPrefab ? markerPrefab : targetPrefab);
+        }
+
+        public void Clear()
+        {
+            TargetStructure = null;
+            if (!(MarkerStructure is null))
+            {
+                Destroy(MarkerStructure);
+                MarkerStructure = null;
+            }
+        }
     }
 }
