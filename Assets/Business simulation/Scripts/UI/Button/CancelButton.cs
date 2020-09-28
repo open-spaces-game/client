@@ -32,6 +32,11 @@ namespace BusinessSimulation.Scripts.UI.Button
 
         private void OnClick()
         {
+            Clear();
+        }
+
+        public void Clear()
+        {
             _terrainTargetPosition.enabled = false;
             _buildTargetPosition.enabled = false;
             _productionMachineTarget.enabled = false;

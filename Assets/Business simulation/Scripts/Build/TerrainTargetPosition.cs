@@ -48,7 +48,15 @@ namespace BusinessSimulation.Scripts.Build
             Ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             IsPosition = TerrainCollider.Raycast(Ray, out _targetPosition, Distance);
         }
+
+        private void OnDisable()
+        {
+            IsPosition = false;
+        }
         
-       
+        private void OnEnable()
+        {
+            IsPosition = false;
+        }
     }
 }

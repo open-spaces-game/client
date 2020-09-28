@@ -38,6 +38,7 @@ namespace BusinessSimulation.Scripts.Build
 
         private void OnEnable()
         {
+            IsPosition = false;
             _buildObjectColliders = FindBuilderColliders();
         }
 
@@ -59,6 +60,11 @@ namespace BusinessSimulation.Scripts.Build
         {
             return GameObject.FindGameObjectsWithTag(GameTag.building.ToString())
                 .Select(build => build.GetComponent<BuildBlock>().floor.GetComponent<Collider>()).ToList();
+        }
+        
+        private void OnDisable()
+        {
+            IsPosition = false;
         }
     }
 }

@@ -4,61 +4,61 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessSimulation.Enum;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BusinessSimulation.Scripts.Build
 {
     public class BuildTarget : MonoBehaviour
     {
-        public GameObject TargetStructure;
-        public GameObject MarkerStructure;
+        [FormerlySerializedAs("TargetStructure")] 
+        public GameObject targetStructure;
+        [FormerlySerializedAs("MarkerStructure")] 
+        public GameObject markerStructure;
 
-        private TerrainTargetPosition TerrainTargetPosition;
-        private List<GameObject> buildings;
-        private MarkerStructureValidator markerStructureValidator;
-        private MarkerStructureColor markerStructureColor;
+        private TerrainTargetPosition _terrainTargetPosition;
+        private List<GameObject> _buildings;
+        private MarkerStructureValidator _markerStructureValidator;
+        private MarkerStructureColor _markerStructureColor;
 
         // Start is called before the first frame update
         void Start()
         {
-            TerrainTargetPosition = GetComponent<TerrainTargetPosition>();
-            MarkerStructure = Instantiate<GameObject>(TargetStructure);
-            markerStructureValidator = MarkerStructure.AddComponent<MarkerStructureValidator>();
-            markerStructureColor = MarkerStructure.AddComponent<MarkerStructureColor>();
-            buildings = FindBuildings(); 
+            _terrainTargetPosition = GetComponent<TerrainTargetPosition>();
+            _buildings = FindBuildings(); 
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (MarkerStructure && TerrainTargetPosition.IsPosition)
+            if (markerStructure && _terrainTargetPosition.IsPosition)
             {
-                MarkerStructure.SetActive(true);
-                MarkerStructure.transform.position = GetMarkerPosition();
+                markerStructure.SetActive(true);
+                markerStructure.transform.position = GetMarkerPosition();
                 
-                var isValidPlace = markerStructureValidator.IsValid(buildings, MarkerStructure);
+                var isValidPlace = _markerStructureValidator.IsValid(_buildings, markerStructure);
                 
                 var validColor = isValidPlace ? Color.white : Color.red;
-                markerStructureColor.ChangeColor(validColor);
+                _markerStructureColor.ChangeColor(validColor);
                 
                 if (isValidPlace && Input.GetMouseButtonDown(0))
                 {
-                    GameObject Structure = Instantiate<GameObject>(TargetStructure);
-                    Structure.transform.position = MarkerStructure.transform.position;
-                    buildings.Add(Structure);
+                    GameObject Structure = Instantiate<GameObject>(targetStructure);
+                    Structure.transform.position = markerStructure.transform.position;
+                    _buildings.Add(Structure);
                 }
             }
             else
             {
-                MarkerStructure.SetActive(false);
+                markerStructure.SetActive(false);
             }
         }
 
         private Vector3 GetMarkerPosition()
         {
-            Vector3 point = TerrainTargetPosition.TargetPosition.point;
+            Vector3 point = _terrainTargetPosition.TargetPosition.point;
             return new Vector3(
                 (int)point.x,
-                point.y + MarkerStructure.transform.localScale.y * 0.5f,
+                point.y + markerStructure.transform.localScale.y * 0.5f,
                 (int)point.z);
         }
         
@@ -93,17 +93,20 @@ namespace BusinessSimulation.Scripts.Build
         public void SetTarget(GameObject targetPrefab, GameObject markerPrefab)
         {
             Clear();
-            TargetStructure = targetPrefab;
-            MarkerStructure = Instantiate(markerPrefab ? markerPrefab : targetPrefab);
+            targetStructure = targetPrefab;
+            markerStructure = Instantiate(markerPrefab ? markerPrefab : targetPrefab);
+            markerStructure = Instantiate<GameObject>(targetStructure);
+            _markerStructureValidator = markerStructure.AddComponent<MarkerStructureValidator>();
+            _markerStructureColor = markerStructure.AddComponent<MarkerStructureColor>();
         }
 
         public void Clear()
         {
-            TargetStructure = null;
-            if (!(MarkerStructure is null))
+            targetStructure = null;
+            if (!(markerStructure is null))
             {
-                Destroy(MarkerStructure);
-                MarkerStructure = null;
+                Destroy(markerStructure);
+                markerStructure = null;
             }
         }
     }
