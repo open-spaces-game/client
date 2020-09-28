@@ -9,7 +9,13 @@ namespace BusinessSimulation.Scripts.UI.Button
 {
     public class InstallationBuildButton : MonoBehaviour, InstallationButtonInterface
     {
-        public GameObject TargetPrefab { get; set; }
+        public GameObject TargetPrefabProperty;
+
+        public GameObject TargetPrefab
+        {
+            get => TargetPrefabProperty;
+            set => TargetPrefabProperty = value;
+        }
 
         private UnityEngine.UI.Button _button;
         private GameObject _indexController;

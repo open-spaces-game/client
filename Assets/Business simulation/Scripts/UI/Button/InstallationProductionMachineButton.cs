@@ -10,7 +10,7 @@ namespace BusinessSimulation.Scripts.UI.Button
     {
         public GameObject TargetPrefab
         {
-            get { return _targetPrefab; }
+            get => _targetPrefab;
             set
             {
                 _targetPrefab = value;
