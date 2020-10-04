@@ -2355,8 +2355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f92a2276b8d9ab041b31aec56405662c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetStructure: {fileID: 0}
-  MarkerStructure: {fileID: 0}
+  targetStructure: {fileID: 0}
+  markerStructure: {fileID: 0}
 --- !u!114 &196480871
 MonoBehaviour:
   m_ObjectHideFlags: 0
