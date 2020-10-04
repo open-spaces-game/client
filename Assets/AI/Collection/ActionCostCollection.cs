@@ -8,8 +8,8 @@ namespace AI.Collection
 {
     public class ActionCostCollection
     {
-        private List<ActionCost> _actionCosts;
-        public ActionCostCollection(List<ActionCost> actionCosts)
+        private IEnumerable<ActionCost> _actionCosts;
+        public ActionCostCollection(IEnumerable<ActionCost> actionCosts)
         {
             _actionCosts = actionCosts;
         }
@@ -29,9 +29,10 @@ namespace AI.Collection
             
             foreach (var actionCost in _actionCosts)
             {
-                actionCost.rangeMin = minSum;
-                actionCost.rangeMax = Mathf.Min(actionCost.Cost / costSum,1);
-                minSum = actionCost.rangeMax;
+                actionCost.RangeMin = minSum;
+                actionCost.RangeMax = Mathf.Min(minSum + actionCost.Cost / costSum,1);
+                minSum = actionCost.RangeMax;
+                // Debug.Log(actionCost.RangeMin  + " " + actionCost.RangeMax);
             }
         }
 

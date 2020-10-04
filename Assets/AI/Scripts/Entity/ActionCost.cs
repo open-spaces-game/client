@@ -1,17 +1,23 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace AI.Scripts.Entity
 {
-    public class ActionCost : MonoBehaviour
+    [Serializable]
+    public class ActionCost 
     {
+        [SerializeField]
         public int Cost;
+        [SerializeField]
         public GameObject Action;
-        public float rangeMin;
-        public float rangeMax;
-
+        [SerializeField]
+        public bool Enabled;
+        public float RangeMin { get; set; }
+        public float RangeMax { get; set; }
+        
         public bool InRange(float value)
         {
-            return rangeMin < value && value < rangeMax;
+            return RangeMin < value && value < RangeMax;
         }
     }
 }

@@ -3,26 +3,37 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AI.Collection;
+using AI.Scripts.Action;
 using AI.Scripts.Entity;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class AIController : MonoBehaviour
+public class NodeController : MonoBehaviour
 {
    public float MaxTimeout;
+   [SerializeField]
+   public List<ActionCost> ActionCosts;
+   
    private float timeout;
    private ActionCostCollection _actionCostAdapter;
 
+   public ActionInterface Action => GetComponent<ActionInterface>();
+
    public void Start()
    {
-      var actionCosts = GetComponents<ActionCost>().Where(actionCost => actionCost.enabled).ToList();
-      _actionCostAdapter = new ActionCostCollection(actionCosts);
+      var enableActionCosts = ActionCosts.Where(actionCost => actionCost.Enabled)
+         // .Where(actionCost => actionCost.Action.activeSelf)
+         .ToList();
+      
+      _actionCostAdapter = new ActionCostCollection(enableActionCosts);
       _actionCostAdapter.Rechek();
+      
+      // gameObject.SetActive(enableActionCosts.Count > 0);
    }
 
    private void OnEnable()
    {
-      _actionCostAdapter.Rechek();
+      _actionCostAdapter?.Rechek();
    }
 
    private void Update()
@@ -40,7 +51,7 @@ public class AIController : MonoBehaviour
       float randValue = Random.Range(0.0f, 1.0f);
 
       var action = _actionCostAdapter.FindByRange(randValue);
-      action.Change();
-      gameObject.SetActive(false);
+      action.EnableAction(this);
+      
    }
 }

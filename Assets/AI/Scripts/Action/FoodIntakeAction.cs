@@ -1,4 +1,5 @@
 ﻿using AI.Enum;
+using AI.Service;
 using UnityEngine;
 
 namespace AI.Scripts.Action
@@ -6,9 +7,11 @@ namespace AI.Scripts.Action
     public class FoodIntakeAction : MonoBehaviour, ActionInterface
     {
         public ActionCostEnum ActionCostType = ActionCostEnum.FoodIntake;
-        public void Change()
+        private NodeController _nodeController => GetComponent<NodeController>();
+
+        public void EnableAction(NodeController nodeController)
         {
-            gameObject.SetActive(true);
+            (new EnableActionService()).EnableAction(_nodeController, nodeController);
         }
     }
 }
