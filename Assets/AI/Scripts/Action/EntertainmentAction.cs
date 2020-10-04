@@ -1,18 +1,37 @@
-﻿using AI.Enum;
+﻿using System;
+using AI.Enum;
 using AI.Service;
 using UnityEngine;
+using UnityEngine.AI;
+using Random = UnityEngine.Random;
+
 
 namespace AI.Scripts.Action
 {
     public class EntertainmentAction : MonoBehaviour, ActionInterface
     {
-        public ActionCostEnum ActionCostType = ActionCostEnum.Entertainment;
-        private NodeController _nodeController => GetComponent<NodeController>();
-
-        public void EnableAction(NodeController nodeController)
+        /// <summary>
+        /// Игровые приставки или иные развлечения
+        /// </summary>
+        public GameObject Target;
+        private NavMeshAgent NavMeshAgent => GetComponentInParent<NavMeshAgent>();
+        
+        private void OnEnable()
         {
-            (new EnableActionService()).EnableAction(_nodeController, nodeController);
+            Debug.Log("Можно прогуляться", this);
+            if (Target) {
+                NavMeshAgent.destination = Target.transform.position;
+                // Debug.Log(NavMeshAgent.destination);
+            }
+            else
+            {
+                NavMeshAgent.destination = new Vector3(
+                    Random.Range(-1f, 1f),
+                    0,
+                    Random.Range(-1f, 1f)
+                ) * 10 + NavMeshAgent.transform.position;
+                // Debug.Log(NavMeshAgent.destination);
+            }
         }
-
     }
 }

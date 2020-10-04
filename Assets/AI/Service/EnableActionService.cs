@@ -9,12 +9,12 @@ namespace AI.Service
         {
             if (enableNode.Action != disableNode.Action)
             {
-                Debug.Log("Disable" + disableNode.Action);
-                disableNode.enabled = true;
+                // Debug.Log("Disable" + disableNode.Action);
+                disableNode.enabled = false;
                 disableNode.Action.enabled = false;
             }
           
-            Debug.Log("Enable" + enableNode.Action);
+            // Debug.Log("Enable" + enableNode.Action);
             enableNode.enabled = true;
             enableNode.Action.enabled = true;
         }

@@ -21,6 +21,14 @@ namespace AI.Collection
             
             return currentActionCost.Action.GetComponent<ActionInterface>();
         }
+        
+        public GameObject FindGameObjectByRange(float randValue)
+        {
+            var currentActionCost = _actionCosts
+                .First(actionCost => actionCost.InRange(randValue));
+            
+            return currentActionCost.Action;
+        }
 
         public void Rechek()
         {

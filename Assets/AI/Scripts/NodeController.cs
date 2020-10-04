@@ -5,6 +5,7 @@ using System.Linq;
 using AI.Collection;
 using AI.Scripts.Action;
 using AI.Scripts.Entity;
+using AI.Service;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -22,13 +23,13 @@ public class NodeController : MonoBehaviour
    public void Start()
    {
       var enableActionCosts = ActionCosts.Where(actionCost => actionCost.Enabled)
-         // .Where(actionCost => actionCost.Action.activeSelf)
+         .Where(actionCost => actionCost.Action.activeSelf)
          .ToList();
       
       _actionCostAdapter = new ActionCostCollection(enableActionCosts);
       _actionCostAdapter.Rechek();
       
-      // gameObject.SetActive(enableActionCosts.Count > 0);
+      gameObject.SetActive(enableActionCosts.Count > 0);
    }
 
    private void OnEnable()
@@ -50,8 +51,12 @@ public class NodeController : MonoBehaviour
    {
       float randValue = Random.Range(0.0f, 1.0f);
 
-      var action = _actionCostAdapter.FindByRange(randValue);
-      action.EnableAction(this);
-      
+      var action = _actionCostAdapter.FindGameObjectByRange(randValue);
+      action.GetComponent<NodeController>().EnableAction(this);
+   }
+
+   public void EnableAction(NodeController disableNodeController)
+   {
+      (new EnableActionService()).EnableAction(this, disableNodeController);
    }
 }
