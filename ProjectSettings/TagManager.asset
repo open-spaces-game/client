@@ -6,6 +6,7 @@ TagManager:
   tags:
   - building
   - IndexController
+  - ProductionMachine
   layers:
   - Default
   - TransparentFX

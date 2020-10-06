@@ -3,6 +3,7 @@
     public enum GameTag
     {
         building,
-        IndexController
+        IndexController,
+        ProductionMachine
     }
 }
