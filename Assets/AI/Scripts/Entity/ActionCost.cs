@@ -7,7 +7,7 @@ namespace AI.Scripts.Entity
     public class ActionCost 
     {
         [SerializeField]
-        public int Cost;
+        public float Cost;
         [SerializeField]
         public GameObject Action;
         [SerializeField]
