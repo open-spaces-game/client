@@ -4,6 +4,7 @@
     {
         building,
         IndexController,
-        ProductionMachine
+        ProductionMachine,
+        Settler
     }
 }

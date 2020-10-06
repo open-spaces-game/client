@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 namespace BusinessSimulation.Scripts.Target
 {
-    public class TargetProductionMachine : MonoBehaviour, TargetPositionInterface
+    public class TargetSettler : MonoBehaviour, TargetPositionInterface
     {
         public float Distance = 1000;
 
@@ -16,7 +16,7 @@ namespace BusinessSimulation.Scripts.Target
         public bool IsPosition { get; private set; }
         
         
-        private List<Collider> _productionMachineObjectColliders;
+        private List<Collider> _settlerObjectColliders;
         private RaycastHit _hit;
         private Ray _ray;
         private int fingerID = -1;
@@ -30,13 +30,13 @@ namespace BusinessSimulation.Scripts.Target
 
         private void Start()
         {
-            _productionMachineObjectColliders = FindProductionMachineColliders();
+            _settlerObjectColliders = FindSettlerColliders();
         }
 
         private void OnEnable()
         {
             IsPosition = false;
-            _productionMachineObjectColliders = FindProductionMachineColliders();
+            _settlerObjectColliders = FindSettlerColliders();
         }
 
         // Update is called once per frame
@@ -50,13 +50,13 @@ namespace BusinessSimulation.Scripts.Target
                 return;
             }
             _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            IsPosition = _productionMachineObjectColliders.Any(collider => collider.Raycast(_ray, out _targetPosition, Distance));
+            IsPosition = _settlerObjectColliders.Any(collider => collider.Raycast(_ray, out _targetPosition, Distance));
         }
 
-        private List<Collider> FindProductionMachineColliders()
+        private List<Collider> FindSettlerColliders()
         {
-            return GameObject.FindGameObjectsWithTag(GameTag.ProductionMachine.ToString())
-                .Select(productionMachine => productionMachine.GetComponent<Collider>()).ToList();
+            return GameObject.FindGameObjectsWithTag(GameTag.Settler.ToString())
+                .Select(settler => settler.GetComponent<Collider>()).ToList();
         }
         
         private void OnDisable()
@@ -66,7 +66,7 @@ namespace BusinessSimulation.Scripts.Target
 
         public void Recheck()
         {
-            _productionMachineObjectColliders = FindProductionMachineColliders();
+            _settlerObjectColliders = FindSettlerColliders();
         }
     }
 }
