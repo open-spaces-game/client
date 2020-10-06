@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using BusinessSimulation.Enum;
 using BusinessSimulation.Scripts.Build;
+using BusinessSimulation.Scripts.Target;
 using UnityEngine;
 
 namespace BusinessSimulation.Scripts.ProductionMachine
@@ -12,11 +15,15 @@ namespace BusinessSimulation.Scripts.ProductionMachine
         
         private TerrainTargetPosition _terrainTargetPosition;
         private BuildTargetPosition _buildTargetPosition;
+        private TargetProductionMachine _targetProductionMachine;
 
         void Start()
         {
             _terrainTargetPosition = GetComponent<TerrainTargetPosition>();
             _buildTargetPosition = GetComponent<BuildTargetPosition>();
+            _targetProductionMachine = GameObject.FindGameObjectsWithTag(GameTag.IndexController.ToString())
+                .FirstOrDefault()
+                ?.GetComponent<TargetProductionMachine>();
         }
         
         void Update()
@@ -37,6 +44,7 @@ namespace BusinessSimulation.Scripts.ProductionMachine
                 {
                     GameObject Structure = Instantiate<GameObject>(TargetProductionMachine);
                     Structure.transform.position = MarkerProductionMachine.transform.position;
+                    _targetProductionMachine.Recheck();
                 }
             }
         }
