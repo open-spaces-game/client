@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BusinessSimulation.Entity
 {
@@ -7,10 +8,11 @@ namespace BusinessSimulation.Entity
     {
         public float Real;
         public float Max;
+        public float Min;
 
         public float GetPct()
         {
-            return Max == 0 ? 0 : Real / Max ;
+            return Math.Abs(Max - Min) < 0.0001f ? Min : Real / Max ;
         }
 
         public void SetValue(float value)
@@ -20,7 +22,7 @@ namespace BusinessSimulation.Entity
 
         public void Damage(float value)
         {
-            Real = Mathf.Max(Real - value, 0);
+            Real = Mathf.Max(Real - value, Min);
         }
     }
 }
