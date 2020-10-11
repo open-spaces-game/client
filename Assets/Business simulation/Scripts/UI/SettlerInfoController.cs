@@ -74,12 +74,6 @@ namespace BusinessSimulation.Scripts.UI
 
             WindowSettler = Instantiate(WindowSettlerPrefab, _uiController.ContainerTarget.transform, true);
 
-            var wordTargetController = WindowSettler.GetComponent<WordTargetController>();
-            if (wordTargetController)
-            {
-                wordTargetController.Target = characteristic.gameObject;
-            }
-
             var settlerPropertyList = WindowSettler.GetComponent<SettlerPropertyList>();
             settlerPropertyList.FoodMinMax = new[] { characteristic.Food.Min, characteristic.Food.Max};
             settlerPropertyList.WaterMinMax = new[] { characteristic.Water.Min, characteristic.Water.Max};
