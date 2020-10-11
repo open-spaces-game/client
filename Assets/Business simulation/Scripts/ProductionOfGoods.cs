@@ -2,6 +2,7 @@
 using BusinessSimulation.Collection;
 using BusinessSimulation.Entity;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace BusinessSimulation.Scripts
 {
@@ -18,23 +19,17 @@ namespace BusinessSimulation.Scripts
         [SerializeField] public List<ProductionGood> IncomingGoods;
         [SerializeField] public ProductionGood OutgoingGood;
         public float GoodProductionTime;
-        public GameObject Citizen;
-
-        private ProductionGoodCollection IncomingProductionGoods
-        {
-            get
-            {
-                return (ProductionGoodCollection) (IncomingGoods is ProductionGoodCollection
-                    ? IncomingGoods
-                    : IncomingGoods = new ProductionGoodCollection(IncomingGoods));
-            }
-        }
-
-
+        public GameObject Settler;
+        public PersonalCharacteristic SettlerInfo => Settler ? Settler.GetComponent<PersonalCharacteristic>() : null;
+        private ProductionGoodCollection IncomingProductionGoods =>
+            (ProductionGoodCollection) (IncomingGoods is ProductionGoodCollection
+                ? IncomingGoods
+                : IncomingGoods = new ProductionGoodCollection(IncomingGoods));
         private PersonalCharacteristic CitizenCharacteristic { get; set; }
         private GoodStorage Storage { get; set; }
 
-        private float TimeOut = 0;
+        public float TimeOut { get; private set; }
+    
 
         /// <summary>
         /// 
@@ -74,7 +69,7 @@ namespace BusinessSimulation.Scripts
         /// <param name="Citizen"></param>
         public void RunProcess(GameObject Citizen)
         {
-            this.Citizen = Citizen;
+            this.Settler = Citizen;
             CitizenCharacteristic = Citizen.GetComponent<PersonalCharacteristic>();
 
             RunProcess();

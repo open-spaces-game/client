@@ -7,5 +7,10 @@ namespace BusinessSimulation.Scripts.UI
         public string Name;
 
         public Sprite Image;
+        
+        private ProductionOfGoods _productionOfGoods;
+        public ProductionOfGoods ProductionOfGoods => _productionOfGoods 
+            ? _productionOfGoods : _productionOfGoods = GetComponent<ProductionOfGoods>();
+
     }
 }
