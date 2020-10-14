@@ -2222,7 +2222,7 @@ MonoBehaviour:
     Good: {fileID: 0}
     Count: 1
   GoodProductionTime: 60
-  Citizen: {fileID: 0}
+  Settler: {fileID: 0}
 --- !u!65 &173160626
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4987,7 +4987,7 @@ MonoBehaviour:
     Good: {fileID: 0}
     Count: 1
   GoodProductionTime: 60
-  Citizen: {fileID: 0}
+  Settler: {fileID: 0}
 --- !u!65 &394011239
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10014,6 +10014,7 @@ GameObject:
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
+  - component: {fileID: 963194231}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -10114,6 +10115,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ContainerTarget: {fileID: 330943772}
+--- !u!114 &963194231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb16a5ffbf4d4adba1fccf642967cda0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WindowProductionMachineInfoPrefab: {fileID: 3364220034762173470, guid: 5d708a32edfdfd147aab0daa281743f4,
+    type: 3}
 --- !u!1 &967326428
 GameObject:
   m_ObjectHideFlags: 0
@@ -12140,7 +12155,7 @@ MonoBehaviour:
     Good: {fileID: 0}
     Count: 1
   GoodProductionTime: 60
-  Citizen: {fileID: 0}
+  Settler: {fileID: 0}
 --- !u!65 &1143457902
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17356,7 +17371,7 @@ MonoBehaviour:
     Good: {fileID: 0}
     Count: 1
   GoodProductionTime: 60
-  Citizen: {fileID: 0}
+  Settler: {fileID: 0}
 --- !u!65 &1647873736
 BoxCollider:
   m_ObjectHideFlags: 0

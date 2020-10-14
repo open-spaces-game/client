@@ -8,9 +8,9 @@ namespace BusinessSimulation.Scripts.UI
 {
     public class ProductionMachineInfoController : MonoBehaviour
     {
-        public GameObject WindowProductionMachineInfo { get; set; }
+        private GameObject WindowProductionMachineInfo;
 
-        public GameObject WindowProductionMachineInfoPrefab { get; set; }
+        public GameObject WindowProductionMachineInfoPrefab;
         
         private GameObject _indexController;
         private TargetProductionMachine _targetProductionMachine;
@@ -74,12 +74,12 @@ namespace BusinessSimulation.Scripts.UI
             var incomingGoods = productionMachineInfo.ProductionOfGoods.IncomingGoods;
             foreach (var good in incomingGoods)
             {
-                productionMachinePropertyList.AddInputProduct(good.Good.name, good.Count);//TODO:: задать имя продукта
+                productionMachinePropertyList.AddInputProduct(good.GoodName, good.Count);
             }
 
-            productionMachinePropertyList.ProductName = productionMachineInfo.ProductionOfGoods.OutgoingGood.Good.name;
+            productionMachinePropertyList.ProductName = productionMachineInfo.ProductionOfGoods.OutgoingGood.GoodName;
             productionMachinePropertyList.ProductCount = productionMachineInfo.ProductionOfGoods.OutgoingGood.Count;
-            productionMachinePropertyList.GoodProductionTime = productionMachineInfo.ProductionOfGoods.GoodProductionTime;
+            productionMachinePropertyList.ProductionTime = productionMachineInfo.ProductionOfGoods.GoodProductionTime;
         }
 
         private void UpdateWindow(ProductionMachineInfo productionMachineInfo)
@@ -90,9 +90,8 @@ namespace BusinessSimulation.Scripts.UI
             
             productionMachinePropertyList.Status = productionMachineInfo.ProductionOfGoods.Status.ToString();
             productionMachinePropertyList.ProductTimeOut = productionMachineInfo.ProductionOfGoods.TimeOut;
-            productionMachinePropertyList.SettlerName = productionMachineInfo.ProductionOfGoods.SettlerInfo?.Name;
-
-            //TODO:: settler
+            if (!(productionMachineInfo.ProductionOfGoods.SettlerInfo is null))
+                productionMachinePropertyList.SettlerName = productionMachineInfo.ProductionOfGoods.SettlerInfo.Name;
         }
     }
 }
