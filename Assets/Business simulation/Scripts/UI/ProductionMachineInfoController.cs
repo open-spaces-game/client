@@ -90,8 +90,9 @@ namespace BusinessSimulation.Scripts.UI
             
             productionMachinePropertyList.Status = productionMachineInfo.ProductionOfGoods.Status.ToString();
             productionMachinePropertyList.ProductTimeOut = productionMachineInfo.ProductionOfGoods.TimeOut;
-            if (!(productionMachineInfo.ProductionOfGoods.SettlerInfo is null))
-                productionMachinePropertyList.SettlerName = productionMachineInfo.ProductionOfGoods.SettlerInfo.Name;
+            productionMachinePropertyList.SettlerName =  !(productionMachineInfo.ProductionOfGoods.SettlerInfo is null) 
+                ? productionMachineInfo.ProductionOfGoods.SettlerInfo.Name
+                : "--";
         }
     }
 }
