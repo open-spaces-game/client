@@ -14,10 +14,8 @@ namespace AI.Scripts.Action
         
         private void OnEnable()
         {
-            GameObject.FindGameObjectsWithTag(GameTag.IndexController.ToString())
-                .FirstOrDefault()
-                ?.GetComponent<SettlerNotification>()
-                .Send("Хочу поспать", this);
+            Camera.main.GetComponent<SettlerNotification>()
+                ?.Send("Хочу поспать", this);
             
             if (Target) {
                 NavMeshAgent.destination = Target.transform.position;

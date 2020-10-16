@@ -14,8 +14,7 @@ namespace AI.Scripts.Action
         
         private void OnEnable()
         {
-            GameObject.FindGameObjectsWithTag(GameTag.IndexController.ToString())
-                .FirstOrDefault()
+            Camera.main.GetComponent<SettlerNotification>()
                 ?.GetComponent<SettlerNotification>()
                 .Send("Нужно работать", this);
             if (Target) {
