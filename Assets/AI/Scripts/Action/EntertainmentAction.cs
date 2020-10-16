@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using AI.Enum;
 using AI.Service;
+using BusinessSimulation.Enum;
+using BusinessSimulation.Scripts;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -18,7 +21,10 @@ namespace AI.Scripts.Action
         
         private void OnEnable()
         {
-            Debug.Log("Можно прогуляться", this);
+            Camera.main.GetComponent<SettlerNotification>()
+                ?.GetComponent<SettlerNotification>()
+                .Send("Можно прогуляться", GetComponentInParent<PersonalCharacteristic>().gameObject);
+            
             if (Target) {
                 NavMeshAgent.destination = Target.transform.position;
                 // Debug.Log(NavMeshAgent.destination);
