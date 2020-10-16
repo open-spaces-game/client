@@ -71,12 +71,11 @@ namespace BusinessSimulation.Scripts.UI
                 ? _waterPropertyValue 
                 : _waterPropertyValue = transform.Find("WaterProperty").Find("PropertyValue").GetComponent<Text>();
         }
-        private Text SleepPropertyValue
-        {
-            get => _sleepPropertyValue 
+        private Text SleepPropertyValue =>
+            _sleepPropertyValue 
                 ? _sleepPropertyValue 
                 : _sleepPropertyValue = transform.Find("SleepProperty").Find("PropertyValue").GetComponent<Text>();
-        }
+
         private Text ClothesPropertyValue
         {
             get => _clothesPropertyValue

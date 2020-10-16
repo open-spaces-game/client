@@ -1,10 +1,16 @@
-﻿using BusinessSimulation.Entity;
+﻿using System;
+using BusinessSimulation.Entity;
 using UnityEngine;
 
 namespace BusinessSimulation.Scripts
 {
     public class PersonalCharacteristic : MonoBehaviour
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        [SerializeField] public String Name;
+        
         /// <summary>
         /// еда
         /// </summary>
@@ -39,6 +45,8 @@ namespace BusinessSimulation.Scripts
         /// КПД
         /// </summary>
         [SerializeField] public Characteristic Efficiency;
+
+        
 
         public bool CanWorkProcess()
         {

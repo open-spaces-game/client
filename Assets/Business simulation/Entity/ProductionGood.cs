@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BusinessSimulation.Entity
 {
@@ -7,5 +8,8 @@ namespace BusinessSimulation.Entity
     {
         public GameObject Good;
         public float Count;
+
+        public string GoodName => Good ? Good.name : ""; //TODO:: задать имя продукта
+
     }
 }
