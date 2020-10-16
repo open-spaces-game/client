@@ -16,7 +16,7 @@ namespace AI.Scripts.Action
         {
             Camera.main.GetComponent<SettlerNotification>()
                 ?.GetComponent<SettlerNotification>()
-                .Send("Нужно работать", this);
+                .Send("Нужно работать", transform.parent.gameObject);
             if (Target) {
                 NavMeshAgent.destination = Target.transform.position;
                 // Debug.Log(NavMeshAgent.destination);

@@ -15,7 +15,7 @@ namespace AI.Scripts.Action
         private void OnEnable()
         {
             Camera.main.GetComponent<SettlerNotification>()
-                ?.Send("Хочу поспать", this);
+                ?.Send("Хочу поспать", transform.parent.gameObject);
             
             if (Target) {
                 NavMeshAgent.destination = Target.transform.position;

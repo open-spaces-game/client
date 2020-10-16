@@ -1,13 +1,50 @@
-﻿using AI.Scripts.Action;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AI.Scripts.Action;
+using BusinessSimulation.Enum;
+using UI.Scripts;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AI.Scripts
 {
     public class SettlerNotification : MonoBehaviour
     {
-        public void Send(string message, MonoBehaviour target)
+        public GameObject SettlerMessagePrefab;
+        private UIController uiController;
+        private Dictionary<GameObject, GameObject> messageContainers;
+
+        private void Start()
         {
-            Debug.Log(message, target);
+            messageContainers = new Dictionary<GameObject, GameObject>();
+            uiController = Camera.main.GetComponent<UIController>();
+        }
+
+        public void Send(string message, GameObject target)
+        {
+            var container = FindMessageBox(target);
+            container.GetComponentInChildren<Text>().text = message;
+            container.SetActive(true);
+            
+        }
+
+        private GameObject FindMessageBox(GameObject target)
+        {
+            GameObject container;
+            if (messageContainers.ContainsKey(target))
+            {
+                container = messageContainers.First(cursor => cursor.Key == target)
+                    .Value;
+            }
+            else
+            {
+                container = Instantiate(SettlerMessagePrefab, uiController.ContainerTarget.transform, true);
+                container.GetComponent<WordTargetController>().Target = target;
+                messageContainers.Add(target, container);
+            }
+
+            return container;
         }
     }
 }
