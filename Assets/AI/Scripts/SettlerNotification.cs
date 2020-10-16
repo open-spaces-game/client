@@ -24,9 +24,12 @@ namespace AI.Scripts
         public void Send(string message, GameObject target)
         {
             var container = FindMessageBox(target);
-            container.GetComponentInChildren<Text>().text = message;
-            container.SetActive(true);
+            var text = container.GetComponentInChildren<Text>();
+            text.text = message;
+            var rect = container.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(text.preferredWidth + 10, rect.sizeDelta.y);
             
+            container.SetActive(true);
         }
 
         private GameObject FindMessageBox(GameObject target)

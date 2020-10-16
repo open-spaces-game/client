@@ -2,6 +2,7 @@
 using AI.Enum;
 using AI.Service;
 using BusinessSimulation.Enum;
+using BusinessSimulation.Scripts;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,7 +17,7 @@ namespace AI.Scripts.Action
         {
             Camera.main.GetComponent<SettlerNotification>()
                 ?.GetComponent<SettlerNotification>()
-                .Send("Нужно работать", transform.parent.gameObject);
+                .Send("Нужно работать", GetComponentInParent<PersonalCharacteristic>().gameObject);
             if (Target) {
                 NavMeshAgent.destination = Target.transform.position;
                 // Debug.Log(NavMeshAgent.destination);
