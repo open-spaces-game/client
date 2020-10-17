@@ -2673,7 +2673,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e264f88af143e0ad23c07e2aea7eae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SettlerMessagePrefab: {fileID: 0}
+  SettlerMessagePrefab: {fileID: 3344344208479077649, guid: e30495088174d5140a5d1a6bbdbf7713,
+    type: 3}
 --- !u!4 &1804948616
 Transform:
   m_ObjectHideFlags: 0
