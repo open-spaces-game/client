@@ -10,8 +10,6 @@ namespace BusinessSimulation.Scripts.UI.Button
     {
         private UnityEngine.UI.Button _button;
         private GameObject _indexController;
-        private TerrainTargetPosition _terrainTargetPosition;
-        private BuildTargetPosition _buildTargetPosition;
         private ProductionMachineTarget _productionMachineTarget;
         private BuildTarget _buildTarget;
 
@@ -23,8 +21,6 @@ namespace BusinessSimulation.Scripts.UI.Button
             if (!(_indexController is null))
             {
                 _button.onClick.AddListener(this.OnClick);
-                _terrainTargetPosition = _indexController.GetComponent<TerrainTargetPosition>();
-                _buildTargetPosition = _indexController.GetComponent<BuildTargetPosition>();
                 _productionMachineTarget = _indexController.GetComponent<ProductionMachineTarget>();
                 _buildTarget = _indexController.GetComponent<BuildTarget>();
             }
@@ -37,8 +33,6 @@ namespace BusinessSimulation.Scripts.UI.Button
 
         public void Clear()
         {
-            _terrainTargetPosition.enabled = false;
-            _buildTargetPosition.enabled = false;
             _productionMachineTarget.enabled = false;
             _buildTarget.enabled = false;
         }

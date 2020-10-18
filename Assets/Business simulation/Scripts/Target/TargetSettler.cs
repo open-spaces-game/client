@@ -15,7 +15,6 @@ namespace BusinessSimulation.Scripts.Target
         private RaycastHit _targetPosition;
         public bool IsPosition { get; private set; }
         
-        
         private List<Collider> _settlerObjectColliders;
         private RaycastHit _hit;
         private Ray _ray;
