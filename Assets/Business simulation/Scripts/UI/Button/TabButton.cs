@@ -14,6 +14,5 @@ namespace BusinessSimulation.Scripts.UI.Button
         {
             TabPanel.GetComponent<PanelScrollViewController>().ActiveTab(Name, TabContent);
         }
-    }    
+    }
 }
-

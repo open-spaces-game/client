@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
+using Business_simulation.Service;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +8,23 @@ namespace BusinessSimulation.Scripts.UI
 {
     public class SettlerPropertyList : MonoBehaviour
     {
+        public PersonalCharacteristic Characteristic { get; set; }
+        private FirstSettlerPropertyService _firstSettlerPropertyService;
+        private SecondSettlerPropertyService _secondSettlerPropertyService;
+        
+        private void Start()
+        {
+            _firstSettlerPropertyService = new FirstSettlerPropertyService();
+            _secondSettlerPropertyService = new SecondSettlerPropertyService();
+            
+            _firstSettlerPropertyService.updateProperty(this, Characteristic);
+        }
+
+        private void Update()
+        {
+            _secondSettlerPropertyService.updateProperty(this, Characteristic);
+        }
+
         private Text _foodPropertyValue;
         private Text _waterPropertyValue;
         private Text _sleepPropertyValue;
@@ -14,6 +33,7 @@ namespace BusinessSimulation.Scripts.UI
         private Text _healthPropertyValue;
         private Text _efficiencyPropertyValue;
         
+
         public float[] FoodMinMax { get; set;}
         public float[] WaterMinMax { get; set; }
         public float[] SleepMinMax { get; set; }
@@ -101,5 +121,7 @@ namespace BusinessSimulation.Scripts.UI
                 ? _efficiencyPropertyValue
                 : _efficiencyPropertyValue = transform.Find("EfficiencyProperty").Find("PropertyValue").GetComponent<Text>();
         }
+
+        
     }
 }
