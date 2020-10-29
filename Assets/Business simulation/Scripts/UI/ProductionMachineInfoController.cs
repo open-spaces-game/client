@@ -16,6 +16,7 @@ namespace BusinessSimulation.Scripts.UI
         private ProductionMachineInfo _productionMachine;
         private CursorProductionMachineHandler _cursorProductionMachineHandler;
         private GameObject _windowProductionMachineInfo;
+        private TargetProductionMachineHandler _targetProductionMachineHandler;
 
         void Start()
         {
@@ -24,14 +25,17 @@ namespace BusinessSimulation.Scripts.UI
             
             var targetProductionMachine = _indexController != null 
                 ? _indexController.GetComponent<TargetProductionMachine>() : null;
+            var targetSelect = Camera.main.GetComponent<TargetSelect>();
             
             _cursorProductionMachineHandler = new CursorProductionMachineHandler(targetProductionMachine);
+            _targetProductionMachineHandler = new TargetProductionMachineHandler(targetSelect);
         }
         
         // Update is called once per frame
         void Update()
         {
             _cursorProductionMachineHandler.onCursor(CreateWindow, UpdateWindow, DisableWindow);
+            _targetProductionMachineHandler.onCursor(CreateWindow, UpdateWindow, DisableWindow);
         }
 
         private void DisableWindow()

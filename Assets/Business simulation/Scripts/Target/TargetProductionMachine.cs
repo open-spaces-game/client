@@ -7,6 +7,9 @@ using UnityEngine.EventSystems;
 
 namespace BusinessSimulation.Scripts.Target
 {
+    /// <summary>
+    /// переименовать в курсор ибо мы оперируем курсором
+    /// </summary>
     public class TargetProductionMachine : MonoBehaviour, TargetPositionInterface
     {
         public float Distance = 1000;

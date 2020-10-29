@@ -10,6 +10,7 @@ using UnityEngine;
 public class TargetSelect : MonoBehaviour
 {
     public GameObject Target;
+    public bool IsPosition { get; private set; }
 
     private List<TargetPositionInterface> _targetControllers;
     private IEnumerable<TargetPositionInterface> _queryObjectTargeted;
@@ -36,10 +37,14 @@ public class TargetSelect : MonoBehaviour
         {
             Target = _queryObjectTargeted.FirstOrDefault()?.TargetPosition.transform.gameObject;
         }
+
+        IsPosition = Target != null;
     }
 
     private bool isClickInObject()
     {
         return Input.GetMouseButtonDown(0);
     }
+
+    
 }

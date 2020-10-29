@@ -21,6 +21,7 @@ namespace BusinessSimulation.Scripts.UI
         private UIController _uiController;
 
         private CursorCharacteristicHandler _cursorCharacteristicHandler;
+        private TargetCharacteristicHandler _targetCharacteristicHandler;
 
         // Start is called before the first frame update
         void Start()
@@ -28,14 +29,18 @@ namespace BusinessSimulation.Scripts.UI
             _indexController = GameObject.FindGameObjectsWithTag(GameTag.IndexController.ToString()).FirstOrDefault();
             _targetSettler = _indexController != null ? _indexController.GetComponent<TargetSettler>() : null;
             _uiController = Camera.main.GetComponent<UIController>();
+            
+            var targetSelect = Camera.main.GetComponent<TargetSelect>();
 
             _cursorCharacteristicHandler = new CursorCharacteristicHandler(_targetSettler);
+            _targetCharacteristicHandler = new TargetCharacteristicHandler(targetSelect);
         }
 
         // Update is called once per frame
         void Update()
         {
             _cursorCharacteristicHandler.onCursor(CreateWindow, UpdateWindow, DisableWindow);
+            _targetCharacteristicHandler.onCursor(CreateWindow, UpdateWindow, DisableWindow);
         }
         
         private void CreateWindow(PersonalCharacteristic characteristic)
