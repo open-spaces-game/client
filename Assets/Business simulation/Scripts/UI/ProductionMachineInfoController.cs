@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Business_simulation.EventHandler;
 using BusinessSimulation.Enum;
 using BusinessSimulation.Scripts.Target;
 using UI.Scripts;
@@ -8,91 +9,52 @@ namespace BusinessSimulation.Scripts.UI
 {
     public class ProductionMachineInfoController : MonoBehaviour
     {
-        private GameObject WindowProductionMachineInfo;
-
         public GameObject WindowProductionMachineInfoPrefab;
         
         private GameObject _indexController;
-        private TargetProductionMachine _targetProductionMachine;
         private UIController _uiController;
-        private bool _enable;
         private ProductionMachineInfo _productionMachine;
+        private CursorProductionMachineHandler _cursorProductionMachineHandler;
+        private GameObject _windowProductionMachineInfo;
 
         void Start()
         {
             _indexController = GameObject.FindGameObjectsWithTag(GameTag.IndexController.ToString()).FirstOrDefault();
-            _targetProductionMachine = _indexController != null ? _indexController.GetComponent<TargetProductionMachine>() : null;
             _uiController = Camera.main.GetComponent<UIController>();
-            _enable = false;
+            
+            var targetProductionMachine = _indexController != null 
+                ? _indexController.GetComponent<TargetProductionMachine>() : null;
+            
+            _cursorProductionMachineHandler = new CursorProductionMachineHandler(targetProductionMachine);
         }
         
         // Update is called once per frame
         void Update()
         {
-            if (_targetProductionMachine.IsPosition)
-            {
-                // PersonalCharacteristic
-                var productionMachine = FindCharacteristic(_targetProductionMachine.TargetPosition.transform.gameObject);
-                if (!_enable && _productionMachine != productionMachine)
-                {
-                    
-                    _productionMachine = productionMachine;
-                    CreateWindow(productionMachine);
-                }
-                _enable = true;
-                UpdateWindow(productionMachine);
-            }
-            else if (!_targetProductionMachine.IsPosition && _enable)
-            {
-                _enable = false;
-                DisableWindow();
-            }
-        }
-
-        private ProductionMachineInfo FindCharacteristic(GameObject transformGameObject)
-        {
-            return transformGameObject.GetComponent<ProductionMachineInfo>() 
-                ? transformGameObject.GetComponentInChildren<ProductionMachineInfo>() : null;
+            _cursorProductionMachineHandler.onCursor(CreateWindow, UpdateWindow, DisableWindow);
         }
 
         private void DisableWindow()
         {
-            WindowProductionMachineInfo.SetActive(false);
+            _windowProductionMachineInfo.SetActive(false);
         }
         
         private void CreateWindow(ProductionMachineInfo productionMachineInfo)
         {
-            if (WindowProductionMachineInfo != null)
+            if (_windowProductionMachineInfo != null)
             {
-                Destroy(WindowProductionMachineInfo);
+                Destroy(_windowProductionMachineInfo);
             }
 
-            WindowProductionMachineInfo = Instantiate(WindowProductionMachineInfoPrefab, _uiController.ContainerTarget.transform, true);
+            _windowProductionMachineInfo = Instantiate(WindowProductionMachineInfoPrefab, _uiController.ContainerTarget.transform, true);
 
-            var productionMachinePropertyList = WindowProductionMachineInfo.GetComponent<WindowProductionMachinePropertyList>();
-            productionMachinePropertyList.Name = productionMachineInfo.Name;
-            var incomingGoods = productionMachineInfo.ProductionOfGoods.IncomingGoods;
-            foreach (var good in incomingGoods)
-            {
-                productionMachinePropertyList.AddInputProduct(good.GoodName, good.Count);
-            }
-
-            productionMachinePropertyList.ProductName = productionMachineInfo.ProductionOfGoods.OutgoingGood.GoodName;
-            productionMachinePropertyList.ProductCount = productionMachineInfo.ProductionOfGoods.OutgoingGood.Count;
-            productionMachinePropertyList.ProductionTime = productionMachineInfo.ProductionOfGoods.GoodProductionTime;
+            var productionMachinePropertyList = _windowProductionMachineInfo.GetComponent<WindowProductionMachinePropertyList>();
+            productionMachinePropertyList.ProductionMachineInfo = productionMachineInfo;
         }
 
         private void UpdateWindow(ProductionMachineInfo productionMachineInfo)
         {
-            WindowProductionMachineInfo.SetActive(true);
-            
-            var productionMachinePropertyList = WindowProductionMachineInfo.GetComponent<WindowProductionMachinePropertyList>();
-            
-            productionMachinePropertyList.Status = productionMachineInfo.ProductionOfGoods.Status.ToString();
-            productionMachinePropertyList.ProductTimeOut = productionMachineInfo.ProductionOfGoods.TimeOut;
-            productionMachinePropertyList.SettlerName =  !(productionMachineInfo.ProductionOfGoods.SettlerInfo is null) 
-                ? productionMachineInfo.ProductionOfGoods.SettlerInfo.Name
-                : "--";
+            _windowProductionMachineInfo.SetActive(true);
         }
     }
 }
