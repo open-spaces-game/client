@@ -6,6 +6,7 @@ using BusinessSimulation.Enum;
 using BusinessSimulation.Scripts.Build;
 using BusinessSimulation.Scripts.Target;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TargetSelect : MonoBehaviour
 {
@@ -14,7 +15,15 @@ public class TargetSelect : MonoBehaviour
 
     private List<TargetPositionInterface> _targetControllers;
     private IEnumerable<TargetPositionInterface> _queryObjectTargeted;
+    private int fingerID = -1;
 
+    private void Awake()
+    {
+#if !UNITY_EDITOR
+                fingerID = 0; 
+#endif
+    }
+    
     private void Start()
     {
         var indexController = GameObject.FindGameObjectsWithTag(GameTag.IndexController.ToString())
@@ -33,6 +42,12 @@ public class TargetSelect : MonoBehaviour
 
     private void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject(fingerID))    // is the touch on the GUI
+        {
+            // GUI Action
+            return;
+        }
+        
         if (isClickInObject())
         {
             Target = _queryObjectTargeted.FirstOrDefault()?.TargetPosition.transform.gameObject;
