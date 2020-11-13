@@ -1,11 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace UI.Scripts
 {
     public class UIController : MonoBehaviour
     {
-        public GameObject ContainerTarget;
+        public GameObject cursorContainer;
+        public GameObject targetContainer;
         private Camera _camera;
 
         private void Start()

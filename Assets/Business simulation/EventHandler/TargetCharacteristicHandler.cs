@@ -16,21 +16,20 @@ namespace Business_simulation.EventHandler
             _targetSelect = targetSelect;
         }
 
-        public void onCursor(Action<PersonalCharacteristic> createWindow, Action<PersonalCharacteristic> updateWindow, Action disableWindow)
+        public void onCursor(Action<PersonalCharacteristic> createWindow, Action disableWindow)
         {
-            if (_targetSelect.IsPosition)
+            if (!_enable && _targetSelect.IsPosition)
             {
                 // PersonalCharacteristic
                 var characteristic = FindCharacteristic(_targetSelect.Target);
-                if (!_enable && _characteristic != characteristic)
+                if ( _characteristic != characteristic)
                 {
                     _characteristic = characteristic;
                     createWindow(characteristic);
                 }
                 _enable = true;
-                updateWindow(characteristic);
             }
-            else if (!_targetSelect.IsPosition && _enable)
+            else if (_enable && !_targetSelect.IsPosition)
             {
                 _enable = false;
                 disableWindow();

@@ -42,7 +42,7 @@ namespace AI.Scripts
             }
             else
             {
-                container = Instantiate(SettlerMessagePrefab, uiController.ContainerTarget.transform, true);
+                container = Instantiate(SettlerMessagePrefab, uiController.cursorContainer.transform, true);
                 container.GetComponent<WordTargetController>().Target = target;
                 messageContainers.Add(target, container);
             }

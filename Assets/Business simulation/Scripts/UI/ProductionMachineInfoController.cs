@@ -58,7 +58,7 @@ namespace BusinessSimulation.Scripts.UI
                 Destroy(_windowProductionMachineInfo);
             }
 
-            _windowProductionMachineInfo = Instantiate(WindowProductionMachineInfoPrefab, _uiController.ContainerTarget.transform, true);
+            _windowProductionMachineInfo = Instantiate(WindowProductionMachineInfoPrefab, _uiController.cursorContainer.transform, true);
 
             var productionMachinePropertyList = _windowProductionMachineInfo.GetComponent<WindowProductionMachinePropertyList>();
             productionMachinePropertyList.ProductionMachineInfo = productionMachineInfo;

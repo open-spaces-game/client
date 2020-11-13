@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace BusinessSimulation.Scripts.UI
 {
-    public class SettlerInfoController : MonoBehaviour
+    public class CursorSettlerInfoController : MonoBehaviour
     {
         public GameObject WindowSettlerPrefab;
         
@@ -21,7 +21,6 @@ namespace BusinessSimulation.Scripts.UI
         private UIController _uiController;
 
         private CursorCharacteristicHandler _cursorCharacteristicHandler;
-        private TargetCharacteristicHandler _targetCharacteristicHandler;
 
         /// <summary>
         /// 
@@ -32,10 +31,7 @@ namespace BusinessSimulation.Scripts.UI
             _targetSettler = _indexController != null ? _indexController.GetComponent<TargetSettler>() : null;
             _uiController = Camera.main.GetComponent<UIController>();
             
-            var targetSelect = Camera.main.GetComponent<TargetSelect>();
-
             _cursorCharacteristicHandler = new CursorCharacteristicHandler(_targetSettler);
-            _targetCharacteristicHandler = new TargetCharacteristicHandler(targetSelect);
         }
 
         /// <summary>
@@ -44,7 +40,6 @@ namespace BusinessSimulation.Scripts.UI
         void Update()
         {
             _cursorCharacteristicHandler.onCursor(CreateWindow, UpdateWindow, DisableWindow);
-            //_targetCharacteristicHandler.onCursor(CreateWindow, UpdateWindow, DisableWindow);
         }
         /// <summary>
         /// 
@@ -57,7 +52,7 @@ namespace BusinessSimulation.Scripts.UI
                 Destroy(_windowSettler);
             }
 
-            _windowSettler = Instantiate(WindowSettlerPrefab, _uiController.ContainerTarget.transform, true);
+            _windowSettler = Instantiate(WindowSettlerPrefab, _uiController.cursorContainer.transform, true);
 
             var settlerPropertyList = _windowSettler.GetComponent<SettlerPropertyList>();
             settlerPropertyList.Characteristic = characteristic;
