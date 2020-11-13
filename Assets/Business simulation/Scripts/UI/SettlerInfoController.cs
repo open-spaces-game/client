@@ -23,7 +23,9 @@ namespace BusinessSimulation.Scripts.UI
         private CursorCharacteristicHandler _cursorCharacteristicHandler;
         private TargetCharacteristicHandler _targetCharacteristicHandler;
 
-        // Start is called before the first frame update
+        /// <summary>
+        /// 
+        /// </summary>
         void Start()
         {
             _indexController = GameObject.FindGameObjectsWithTag(GameTag.IndexController.ToString()).FirstOrDefault();
@@ -36,13 +38,18 @@ namespace BusinessSimulation.Scripts.UI
             _targetCharacteristicHandler = new TargetCharacteristicHandler(targetSelect);
         }
 
-        // Update is called once per frame
+        /// <summary>
+        /// 
+        /// </summary>
         void Update()
         {
             _cursorCharacteristicHandler.onCursor(CreateWindow, UpdateWindow, DisableWindow);
-            _targetCharacteristicHandler.onCursor(CreateWindow, UpdateWindow, DisableWindow);
+            //_targetCharacteristicHandler.onCursor(CreateWindow, UpdateWindow, DisableWindow);
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="characteristic"></param>
         private void CreateWindow(PersonalCharacteristic characteristic)
         {
             if (_windowSettler != null)
@@ -55,15 +62,23 @@ namespace BusinessSimulation.Scripts.UI
             var settlerPropertyList = _windowSettler.GetComponent<SettlerPropertyList>();
             settlerPropertyList.Characteristic = characteristic;
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="characteristic"></param>
         private void UpdateWindow(PersonalCharacteristic characteristic)
         {
             _windowSettler.SetActive(true);
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
         private void DisableWindow()
         {
-            _windowSettler.SetActive(false);
+            if (_windowSettler != null)
+            {
+                _windowSettler.SetActive(false);
+            }
         }
     }
 }

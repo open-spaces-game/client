@@ -17,7 +17,9 @@ namespace BusinessSimulation.Scripts.UI
         private CursorProductionMachineHandler _cursorProductionMachineHandler;
         private GameObject _windowProductionMachineInfo;
         private TargetProductionMachineHandler _targetProductionMachineHandler;
-
+        /// <summary>
+        /// 
+        /// </summary>
         void Start()
         {
             _indexController = GameObject.FindGameObjectsWithTag(GameTag.IndexController.ToString()).FirstOrDefault();
@@ -30,19 +32,25 @@ namespace BusinessSimulation.Scripts.UI
             _cursorProductionMachineHandler = new CursorProductionMachineHandler(targetProductionMachine);
             _targetProductionMachineHandler = new TargetProductionMachineHandler(targetSelect);
         }
-        
-        // Update is called once per frame
+        /// <summary>
+        /// 
+        /// </summary>
         void Update()
         {
             _cursorProductionMachineHandler.onCursor(CreateWindow, UpdateWindow, DisableWindow);
-            _targetProductionMachineHandler.onCursor(CreateWindow, UpdateWindow, DisableWindow);
+            //_targetProductionMachineHandler.onCursor(CreateWindow, UpdateWindow, DisableWindow);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         private void DisableWindow()
         {
             _windowProductionMachineInfo.SetActive(false);
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productionMachineInfo"></param>
         private void CreateWindow(ProductionMachineInfo productionMachineInfo)
         {
             if (_windowProductionMachineInfo != null)
@@ -55,7 +63,10 @@ namespace BusinessSimulation.Scripts.UI
             var productionMachinePropertyList = _windowProductionMachineInfo.GetComponent<WindowProductionMachinePropertyList>();
             productionMachinePropertyList.ProductionMachineInfo = productionMachineInfo;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productionMachineInfo"></param>
         private void UpdateWindow(ProductionMachineInfo productionMachineInfo)
         {
             _windowProductionMachineInfo.SetActive(true);
